@@ -15,10 +15,6 @@ public record UserDTO(
         @Size(min = 2, max = 30, message = "Il cognome deve essere tra i 2 e i 30 caratteri")
         String surname,
 
-        @NotBlank(message = "L'username é un campo obbligatorio")
-        @Size(min = 5, max = 30, message = "Lo username deve essere tra i 5 e i 30 caratteri")
-        String username,
-
         @NotBlank(message = "L'email è obbligatoria")
         @Email(message = "L'indirizzo email inserito non è nel formato corretto!")
         String email,

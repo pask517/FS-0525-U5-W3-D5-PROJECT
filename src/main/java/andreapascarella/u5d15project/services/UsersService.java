@@ -19,7 +19,7 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
-    public User save(UserDTO payload) {
+    public User saveUser(UserDTO payload) {
 
         this.usersRepository.findByEmail(payload.email()).ifPresent(user -> {
             throw new BadRequestException("L'email " + user.getEmail() + " è già in uso!");
