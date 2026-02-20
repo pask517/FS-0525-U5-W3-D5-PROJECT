@@ -26,7 +26,7 @@ public class ReservationsService {
     }
 
     public Reservation saveReservation(ReservationDTO payload) {
-        this.reservationsRepository.findByUserIdAndEventId(payload.userId(), payload.eventId()).ifPresent(reservation -> {
+        this.reservationsRepository.findByUserUserIdAndEventEventId(UUID.fromString(payload.userId()), UUID.fromString(payload.eventId())).ifPresent(reservation -> {
             throw new BadRequestException("Hai giá una prenotazione per questo evento");
         });
 
