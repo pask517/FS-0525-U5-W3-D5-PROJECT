@@ -30,6 +30,10 @@ public class ReservationsService {
             throw new BadRequestException("Hai giá una prenotazione per questo evento");
         });
 
+        if (this.reservationsRepository.countByEventEventId(UUID.fromString(payload.eventId())) >= eventsService.findById(UUID.fromString(payload.eventId())).getMaxOccupancy()) {
+            throw new BadRequestException("É stato raggiunto il numero massimo di partecipanti per questo evento!");
+        }
+        
         Reservation newReservation = new Reservation(usersService.findById(UUID.fromString(payload.userId())), eventsService.findById(UUID.fromString(payload.eventId())));
 
         Reservation savedReservation = this.reservationsRepository.save(newReservation);

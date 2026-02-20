@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -32,7 +33,9 @@ public class EventsService {
         this.eventsRepository.findByLocationAndEventDate(payload.location(), payload.eventDate()).ifPresent(event -> {
             throw new BadRequestException("L'evento con location " + event.getLocation() + " in data " + event.getEventDate() + " é giá in programma!");
         });
-
+        if (payload.eventDate().isBefore(LocalDate.now())) {
+            throw new BadRequestException("Non puoi organizzare un evento nel passato");
+        }
         Event newEvent = new Event(usersService.findById(UUID.fromString(payload.userId())), payload.title(), payload.description(), payload.eventDate(), payload.location(), payload.maxOccupancy());
 
         Event savedEvent = this.eventsRepository.save(newEvent);

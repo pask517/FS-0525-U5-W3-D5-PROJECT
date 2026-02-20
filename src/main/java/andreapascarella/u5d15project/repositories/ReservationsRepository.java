@@ -12,5 +12,6 @@ public interface ReservationsRepository extends JpaRepository<Reservation, UUID>
 
     Optional<Reservation> findByUserUserIdAndEventEventId(UUID userId, UUID eventId);
 
+    long countByEventEventId(UUID eventId);
 
 }
