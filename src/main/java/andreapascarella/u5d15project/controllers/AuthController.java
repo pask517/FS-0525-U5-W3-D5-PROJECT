@@ -7,6 +7,7 @@ import andreapascarella.u5d15project.payloads.LoginResponseDTO;
 import andreapascarella.u5d15project.payloads.UserDTO;
 import andreapascarella.u5d15project.services.AuthService;
 import andreapascarella.u5d15project.services.UsersService;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AuthController {
     private final AuthService authService;
     private final UsersService usersService;
-
+    
     public AuthController(AuthService authService, UsersService usersService) {
         this.authService = authService;
         this.usersService = usersService;
@@ -39,13 +40,12 @@ public class AuthController {
 
             List<String> errorsList = validationResult.getFieldErrors()
                     .stream()
-                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toList();
 
             throw new ValidationException(errorsList);
         } else {
             return this.usersService.saveUser(payload);
         }
-
     }
 }

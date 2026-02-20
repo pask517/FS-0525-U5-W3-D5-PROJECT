@@ -1,10 +1,7 @@
 package andreapascarella.u5d15project.payloads;
 
 import andreapascarella.u5d15project.entities.Role;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public record UserDTO(
 
@@ -22,9 +19,9 @@ public record UserDTO(
 
         @NotBlank(message = "La password è obbligatoria")
         @Size(min = 4, message = "La password deve avere almeno 4 caratteri")
-        @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$", message = "La password deve contenere una maiuscola, una minuscola e un carattere speciale")
+        @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$", message = "La password deve contenere una maiuscola, una minuscola, un numero e un carattere speciale")
         String password,
 
-        @NotBlank(message = "Il ruolo é un campo obbligatorio")
+        @NotNull(message = "Il ruolo é un campo obbligatorio")
         Role role) {
 }
