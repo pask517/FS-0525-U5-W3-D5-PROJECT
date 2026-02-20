@@ -1,12 +1,12 @@
 package andreapascarella.u5d15project.controllers;
 
 import andreapascarella.u5d15project.entities.User;
+import andreapascarella.u5d15project.exceptions.ValidationException;
 import andreapascarella.u5d15project.payloads.LoginDTO;
 import andreapascarella.u5d15project.payloads.LoginResponseDTO;
 import andreapascarella.u5d15project.payloads.UserDTO;
 import andreapascarella.u5d15project.services.AuthService;
 import andreapascarella.u5d15project.services.UsersService;
-import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
