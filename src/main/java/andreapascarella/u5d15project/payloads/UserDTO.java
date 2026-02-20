@@ -1,6 +1,6 @@
 package andreapascarella.u5d15project.payloads;
 
-import andreapascarella.u5d15project.entities.Role;
+import andreapascarella.u5d15project.enums.Role;
 import jakarta.validation.constraints.*;
 
 public record UserDTO(

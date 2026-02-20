@@ -1,6 +1,7 @@
 package andreapascarella.u5d15project.services;
 
 import andreapascarella.u5d15project.entities.User;
+import andreapascarella.u5d15project.exceptions.BadRequestException;
 import andreapascarella.u5d15project.exceptions.NotFoundException;
 import andreapascarella.u5d15project.payloads.UserDTO;
 import andreapascarella.u5d15project.repositories.UsersRepository;
@@ -32,6 +33,7 @@ public class UsersService {
     public User saveUser(UserDTO payload) {
 
         this.usersRepository.findByEmail(payload.email()).ifPresent(user -> {
+            throw new BadRequestException("L'email " + user.getEmail() + " è già in uso!");
         });
 
         User newUser = new User(payload.name(), payload.surname(), payload.email(), bcrypt.encode(payload.password()), payload.role());
